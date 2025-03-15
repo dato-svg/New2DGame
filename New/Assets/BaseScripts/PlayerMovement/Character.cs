@@ -24,7 +24,7 @@ namespace BaseScripts.PlayerMovement
             _jumper = new PlayerJumper(playerRB, playerData,groundLayer);
             _inputHandler = new PlayerInputHandler();
         }
-
+        
         private void Update()
         {
             _mover.Move(_inputHandler.MoveDirection);

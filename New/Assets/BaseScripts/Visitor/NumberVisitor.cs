@@ -17,13 +17,13 @@ namespace BaseScripts.Visitor
         
         public void Visit(OneNumber oneNumber)
         {
-            _playerData.MindScore -= 10;
+            _playerData.MindScore -= 1;
             ShowScore();
         }
 
         public void Visit(ZeroNumber zeroNumber)
         {
-            _playerData.MindScore -= 20;
+            _playerData.MindScore -= 2;
             ShowScore();
         }
 
