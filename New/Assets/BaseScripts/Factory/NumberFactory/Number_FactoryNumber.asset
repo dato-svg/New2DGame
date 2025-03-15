@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a11ea20cc7147799fb181611ccd4259, type: 3}
   m_Name: Number_FactoryNumber
   m_EditorClassIdentifier: 
-  ZeroNumber: {fileID: 1844965298438732918, guid: 04063844e37f2574d991d4da28a33f6d, type: 3}
-  OneNumber: {fileID: -5781558580638606776, guid: 97c5a54540faa3c4c8f9c7c55f7f355f, type: 3}
+  zeroNumber: {fileID: 1844965298438732918, guid: 04063844e37f2574d991d4da28a33f6d, type: 3}
+  oneNumber: {fileID: -5781558580638606776, guid: 97c5a54540faa3c4c8f9c7c55f7f355f, type: 3}
