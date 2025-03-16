@@ -3,20 +3,25 @@ using UnityEngine;
 
 namespace BaseScripts.BugSystem
 {
+    [RequireComponent(typeof(Rigidbody2D))]
     public class BlinkingObject : MonoBehaviour, IBlinkable
     {
+        [field:SerializeField] public bool Blinking { get; private set; }
+        
         [SerializeField] private float activeTime = 2f; 
         [SerializeField] private float blinkInterval = 0.2f;
         [SerializeField] private int blinkCount = 5;
         
-        public Collider2D _collider2D;
-        public SpriteRenderer _spriteRenderer;
+        [SerializeField] private BodyChanger _bodyChanger;
+        private Collider2D _collider2D;
+        private SpriteRenderer _spriteRenderer;
         private Rigidbody2D _rigidbody2D;
         
         private Coroutine _blinkCoroutine;
 
         private void Awake()
         {
+            _bodyChanger = GetComponentInParent<BodyChanger>();
             _collider2D = GetComponent<Collider2D>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -37,16 +42,20 @@ namespace BaseScripts.BugSystem
         
         private IEnumerator Blink()
         {
-            while (blinkInterval > 0)
+            while (blinkCount > 0)
             {
-                Debug.Log("blinking");
+                yield return new WaitForSeconds(blinkInterval);
                 ActiveEnableObject(false);
                 yield return new WaitForSeconds(blinkInterval);
                 ActiveEnableObject(true);
                 blinkCount--;
+                Blinking = true;
             }
             
+            Debug.Log("blinking");
+            _bodyChanger.ActiveRandomObject();
             ActiveEnableObject(true);
+            Blinking = false;
             yield return new WaitForSeconds(activeTime);
             Activate();
         }

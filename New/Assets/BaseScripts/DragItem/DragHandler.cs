@@ -1,3 +1,4 @@
+using BaseScripts.BugSystem;
 using UnityEngine;
 
 namespace BaseScripts.DragItem
@@ -5,7 +6,9 @@ namespace BaseScripts.DragItem
     public class DragHandler : MonoBehaviour
     {
         private IDraggable _currentDraggable;
-
+        
+        private RaycastHit2D _hit;
+        
         private void Update()
         {
             if (Input.GetMouseButtonDown(0))
@@ -16,22 +19,37 @@ namespace BaseScripts.DragItem
 
             if (Input.GetMouseButtonUp(0) && _currentDraggable != null)
                 EndDrag();
+
+            CheckBlinking();
         }
         
         private void TryStartDrag()
         {
             Vector2 mousePos = GetMouseWorldPosition();
-            RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+            _hit = Physics2D.Raycast(mousePos, Vector2.zero);
         
-            if (hit.collider != null && hit.collider.TryGetComponent<IDraggable>(out var draggable))
+            if (_hit.collider != null && _hit.collider.TryGetComponent<IDraggable>(out var draggable) && _hit.collider.TryGetComponent<BlinkingObject>(out var blinkingObject))
             {
+                if (blinkingObject.Blinking)
+                    return;
+                
                 _currentDraggable = draggable;
                 _currentDraggable.OnDragStart();
             }
         }
 
+        private void CheckBlinking()
+        {
+            if (_hit.collider != null  && _hit.collider.TryGetComponent<BlinkingObject>(out var blinkingObject))
+                if (blinkingObject.Blinking) 
+                    EndDrag();
+        }
+
         private void EndDrag()
         {
+            if (_currentDraggable == null)
+                return;
+            
             _currentDraggable.OnDragEnd();
             _currentDraggable = null;
         }
