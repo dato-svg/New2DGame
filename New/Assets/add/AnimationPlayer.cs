@@ -12,8 +12,5 @@ public class AnimationPlayer : MonoBehaviour
     {
         animator.SetBool("Run", false);
     }
-    public void Jump()
-    {
-        animator.SetTrigger("jump");z
-    }
+
 }
