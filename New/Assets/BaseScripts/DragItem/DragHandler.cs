@@ -5,6 +5,12 @@ namespace BaseScripts.DragItem
 {
     public class DragHandler : MonoBehaviour
     {
+        [SerializeField] private Collider2D _collider;
+        [SerializeField] private LineRenderer _line;
+        
+        public const float MAX_DISTANCE = 4;
+        public const float THROW_INPULSE = 10;
+        
         private IDraggable _currentDraggable;
         
         private RaycastHit2D _hit;
@@ -15,7 +21,12 @@ namespace BaseScripts.DragItem
                 TryStartDrag();
 
             if (Input.GetMouseButton(0) && _currentDraggable != null)
+            {
                 _currentDraggable.OnDrag(GetMouseWorldPosition());
+                
+                _line.SetPosition(0, transform.position);
+                _line.SetPosition(1, (_currentDraggable as MonoBehaviour).transform.position);
+            }
 
             if (Input.GetMouseButtonUp(0) && _currentDraggable != null)
                 EndDrag();
@@ -28,13 +39,17 @@ namespace BaseScripts.DragItem
             Vector2 mousePos = GetMouseWorldPosition();
             _hit = Physics2D.Raycast(mousePos, Vector2.zero);
         
-            if (_hit.collider != null && _hit.collider.TryGetComponent<IDraggable>(out var draggable) && _hit.collider.TryGetComponent<BlinkingObject>(out var blinkingObject))
+            if (_hit.collider != null && _hit.collider.TryGetComponent<IDraggable>(out var draggable))
             {
-                if (blinkingObject.Blinking)
-                    return;
+                if (Vector3.Distance(transform.position, _hit.transform.position) > MAX_DISTANCE) return;
                 
                 _currentDraggable = draggable;
-                _currentDraggable.OnDragStart();
+                _currentDraggable.OnDragStart(this);
+                
+                Physics2D.IgnoreCollision(_collider, _hit.collider, true);
+
+                _line.positionCount = 2;
+                _line.enabled = true;
             }
         }
 
@@ -50,8 +65,12 @@ namespace BaseScripts.DragItem
             if (_currentDraggable == null)
                 return;
             
-            _currentDraggable.OnDragEnd();
+            Physics2D.IgnoreCollision(_collider, (_currentDraggable as MonoBehaviour).GetComponent<Collider2D>(), false);
+            
+            _currentDraggable.OnDragEnd(GetMouseWorldPosition());
             _currentDraggable = null;
+
+            _line.enabled = false;
         }
 
         private Vector2 GetMouseWorldPosition()
