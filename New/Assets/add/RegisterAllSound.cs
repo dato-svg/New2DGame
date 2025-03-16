@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace add
 {
@@ -15,6 +14,9 @@ namespace add
        
        public AudioClip walkSound;
        public string walkSoundString = "walkSound";
+       
+       public AudioClip loadingSound;
+       public string loadingSoundString = "loadingSound";
 
 
        private void Awake()
@@ -30,12 +32,13 @@ namespace add
            }
            
        }
-
+        
        private void Start()
        {
            AudioManager.Instance.RegisterSound(errorTouchString, errorTouch);
            AudioManager.Instance.RegisterSound(jumpSoundString, jumpSound);
            AudioManager.Instance.RegisterSound(walkSoundString, walkSound);
+           AudioManager.Instance.RegisterSound(loadingSoundString, loadingSound);
        }
        
     }

@@ -445,6 +445,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   errorTouch: {fileID: 8300000, guid: 16fc73e2ed37be04cbe4ea7cd2128104, type: 3}
   errorTouchString: errorTouch
+  jumpSound: {fileID: 8300000, guid: 7639f91a2af743a48986bb523a2a27b6, type: 3}
+  jumpSoundString: jumpSound
+  walkSound: {fileID: 8300000, guid: e7263dd47c0a1e946980df72d4eceb47, type: 3}
+  walkSoundString: walkSound
+  loadingSound: {fileID: 0}
+  loadingSoundString: loadingSound
 --- !u!1 &7587660210806707708
 GameObject:
   m_ObjectHideFlags: 0
