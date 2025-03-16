@@ -627,7 +627,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 815146473}
+  - {fileID: 746017347}
   m_Father: {fileID: 993706399}
   m_LocalEulerAnglesHint: {x: 180, y: 0, z: -90}
   m_AnchorMin: {x: 0, y: 0}
@@ -673,7 +673,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 599019384}
   m_CullTransparentMesh: 1
---- !u!1 &815146472
+--- !u!1 &746017346
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -681,11 +681,11 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 815146473}
-  - component: {fileID: 815146477}
-  - component: {fileID: 815146476}
-  - component: {fileID: 815146475}
-  - component: {fileID: 815146474}
+  - component: {fileID: 746017347}
+  - component: {fileID: 746017351}
+  - component: {fileID: 746017350}
+  - component: {fileID: 746017349}
+  - component: {fileID: 746017348}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -693,13 +693,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &815146473
+--- !u!224 &746017347
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 815146472}
+  m_GameObject: {fileID: 746017346}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.0000002299203}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -712,25 +712,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0.00000029802322, y: 0.000000059604645}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &815146474
+--- !u!114 &746017348
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 815146472}
+  m_GameObject: {fileID: 746017346}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1584653d6e0f62f47afe86abb32d1d53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &815146475
+  CanChangeScene: 0
+--- !u!114 &746017349
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 815146472}
+  m_GameObject: {fileID: 746017346}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -764,13 +765,13 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 815146476}
+  m_TargetGraphic: {fileID: 746017350}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 815146474}
+      - m_Target: {fileID: 746017348}
         m_TargetAssemblyTypeName: BaseScripts.SceneGod.GameStarter, Assembly-CSharp
-        m_MethodName: ChangeSce
+        m_MethodName: Nakonecto
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -780,13 +781,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &815146476
+--- !u!114 &746017350
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 815146472}
+  m_GameObject: {fileID: 746017346}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -810,13 +811,13 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!222 &815146477
+--- !u!222 &746017351
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 815146472}
+  m_GameObject: {fileID: 746017346}
   m_CullTransparentMesh: 1
 --- !u!1 &974186756 stripped
 GameObject:
@@ -934,7 +935,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 7370277068505859995}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -3644,6 +3645,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   source: {fileID: 0}
+  gameStarter: {fileID: 746017348}
 --- !u!82 &8808235876542938611
 AudioSource:
   m_ObjectHideFlags: 0
