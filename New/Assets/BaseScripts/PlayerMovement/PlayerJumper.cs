@@ -1,3 +1,4 @@
+using add;
 using UnityEngine;
 
 namespace BaseScripts.PlayerMovement
@@ -20,6 +21,7 @@ namespace BaseScripts.PlayerMovement
             if (_data.IsGrounded)
             {
                 _rb.AddForce(Vector2.up * _data.JumpForce, ForceMode2D.Impulse);
+                AudioManager.Instance.PlaySound(RegisterAllSound.Instance.jumpSoundString);
                 _data.IsGrounded = false;
             }
         }

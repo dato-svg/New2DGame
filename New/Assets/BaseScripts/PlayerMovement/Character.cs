@@ -59,7 +59,6 @@ namespace BaseScripts.PlayerMovement
 
         private void PlayerRotation()
         {
-          
             if (normalPerson)
             {
                 _spriteRenderer.enabled = false;
@@ -72,7 +71,6 @@ namespace BaseScripts.PlayerMovement
                 else if(_inputHandler.MoveDirection <= -1) 
                     transform.rotation = Quaternion.Euler(0, -euler, -euler);
             }
-         
         }
         
     }

@@ -11,19 +11,14 @@ namespace BaseScripts.Player
 
         [SerializeField] private GameObject ITSABAGXAXAA;
         
-        [SerializeField] private AudioClip errorTouch; 
-        private readonly string _errorTouchString = "ErrorTouch"; 
-        
         private SpriteRenderer _spriteRenderer;
         
         private Coroutine _coroutine;
         
-        private void Awake()
+        private void Start()
         {
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _spriteRenderer.color = baseColor;
-            AudioManager.Instance.RegisterSound(_errorTouchString, errorTouch);
-            Debug.Log("Register Sound:"  + _errorTouchString);
         }
         
         public void StartCoroutiner()
@@ -43,8 +38,7 @@ namespace BaseScripts.Player
         
         private IEnumerator StartColorChanger()
         {
-            Debug.Log("Start ColorChanger");
-            AudioManager.Instance.PlaySound(_errorTouchString,1,false);
+            AudioManager.Instance.PlaySound(RegisterAllSound.Instance.errorTouchString, 1, false);
             GameObject bug = Instantiate(ITSABAGXAXAA,transform.position,Quaternion.identity);
             _spriteRenderer.color = touchColor;
             yield return new WaitForSeconds(0.3f);
