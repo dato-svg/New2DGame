@@ -16,6 +16,7 @@ namespace BaseScripts.Factory.NumberFactory
 
         [SerializeField] private List<Number> enemyNumber; // TODO -- CHANGE VISIBLE
         
+        
         private Character _character;
         private Coroutine _spawnCoroutine;
         private NumberVisitor visitor;
