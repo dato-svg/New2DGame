@@ -28,12 +28,17 @@ namespace BaseScripts.PlayerMovement
         private void Update()
         {
             _mover.Move(_inputHandler.MoveDirection);
+            if(_inputHandler.MoveDirection != 0 )
+            {
+
+            }
             
             _jumper.UpdateGroundedState();
 
             if (_inputHandler.JumpPressed && playerData.IsGrounded)
             {
                 _jumper.Jump();
+
                 _inputHandler.ResetJump();
             }
         }
