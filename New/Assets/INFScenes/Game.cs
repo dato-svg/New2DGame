@@ -1,59 +1,55 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Game : MonoBehaviour
+namespace INFScenes
 {
-    [SerializeField] private ErrorFixer _errorFixer;
-    [SerializeField] private int nextSceneBuildIndex;
-    [SerializeField] private GameObject OnFinishUI;
+    public class Game : MonoBehaviour
+    {
+        [SerializeField] private ErrorFixer _errorFixer;
+        [SerializeField] private int nextSceneBuildIndex;
+        [SerializeField] private GameObject OnFinishUI;
     
-    public static int TargetCountOfFixedErrors { get; set; }
+        public static int TargetCountOfFixedErrors { get; set; }
 
 
-    private void Awake()
-    {
-        TargetCountOfFixedErrors = 0;
-    }
+        private void Awake() => 
+            TargetCountOfFixedErrors = 0;
 
 
-    private void OnEnable()
-    {
-        _errorFixer.Changed += OnCountOfFixedErrorChanged;
-    }
+        private void OnEnable() => 
+            _errorFixer.Changed += OnCountOfFixedErrorChanged;
 
-    private void OnDisable()
-    {
-        _errorFixer.Changed -= OnCountOfFixedErrorChanged;
-    }
+        private void OnDisable() => 
+            _errorFixer.Changed -= OnCountOfFixedErrorChanged;
 
-    private void OnCountOfFixedErrorChanged()
-    {
-        if (_errorFixer.CountOfFixedErrors >= TargetCountOfFixedErrors)
+        private void OnCountOfFixedErrorChanged()
         {
-            StopAllCoroutines();
+            if (_errorFixer.CountOfFixedErrors >= TargetCountOfFixedErrors)
+            {
+                StopAllCoroutines();
 
-            StartCoroutine(Finish());
+                StartCoroutine(Finish());
+            }
         }
-    }
 
-    private IEnumerator Finish()
-    {
-        yield return new WaitForSecondsRealtime(1.5f);
+        private IEnumerator Finish()
+        {
+            yield return new WaitForSecondsRealtime(1.5f);
         
-        Time.timeScale = 0;
+            Time.timeScale = 0;
 
-        yield return new WaitForSecondsRealtime(1f);
+            yield return new WaitForSecondsRealtime(1f);
 
-        OnFinishUI.SetActive(true);
+            OnFinishUI.SetActive(true);
 
-        yield return new WaitForSecondsRealtime(5f);
+            yield return new WaitForSecondsRealtime(5f);
         
-        OnFinishUI.SetActive(false);
+            OnFinishUI.SetActive(false);
 
-        Time.timeScale = 1f;
+            Time.timeScale = 1f;
 
-        SceneManager.LoadScene(nextSceneBuildIndex);
+            SceneManager.LoadScene(nextSceneBuildIndex);
+        }
     }
 }
