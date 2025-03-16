@@ -4,8 +4,8 @@ namespace BaseScripts.DragItem
 {
     public interface IDraggable
     {
-        void OnDragStart();
+        void OnDragStart(DragHandler handler);
         void OnDrag(Vector2 position);
-        void OnDragEnd();
+        void OnDragEnd(Vector2 position);
     }
 }
