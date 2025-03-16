@@ -1,20 +1,35 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace INFScenes
 {
-    public class Game : MonoBehaviour
+
+
+    public static int TargetCountOfFixedErrors
     {
-        [SerializeField] private ErrorFixer _errorFixer;
-        [SerializeField] private int nextSceneBuildIndex;
-        [SerializeField] private GameObject OnFinishUI;
+        get
+        {
+            return _targetCount;
+        }
+        set
+        {
+            _targetCount = value;
+            
+            FindAnyObjectByType<Game>().OnCountOfFixedErrorChanged();
+        }
+    }
+
+    private static int _targetCount;
     
-        public static int TargetCountOfFixedErrors { get; set; }
+    private List<GameObject> _errorMessages = new List<GameObject>();
+    
+    
 
 
-        private void Awake() => 
-            TargetCountOfFixedErrors = 0;
 
 
         private void OnEnable() => 
@@ -32,6 +47,7 @@ namespace INFScenes
                 StartCoroutine(Finish());
             }
         }
+
 
         private IEnumerator Finish()
         {

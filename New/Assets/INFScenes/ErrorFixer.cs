@@ -3,8 +3,22 @@ using UnityEngine;
 
 public class ErrorFixer : MonoBehaviour
 {
-    public int CountOfFixedErrors { get; private set; }
+    public int CountOfFixedErrors
+    {
+        get
+        {
+            return _count;
+        }
+        set
+        {
+            _count = value;
+
+            Changed?.Invoke();
+        }
+    }
     public event Action Changed;
+
+    private int _count;
     
     [SerializeField] private Rigidbody2D _commentedErrorPrefab;
     [SerializeField] private ParticleSystem _particles;
@@ -24,8 +38,6 @@ public class ErrorFixer : MonoBehaviour
             Destroy(error);
 
             CountOfFixedErrors++;
-
-            Changed?.Invoke();
 
             if (_fixedSound) _fixedSound.Play();
 
