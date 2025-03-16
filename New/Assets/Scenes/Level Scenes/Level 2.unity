@@ -987,6 +987,10 @@ PrefabInstance:
       propertyPath: _errorFixer
       value: 
       objectReference: {fileID: 474739807}
+    - target: {fileID: 3648333368423889644, guid: 3696d16c82ed7df45aeaf1e60024ba3d, type: 3}
+      propertyPath: nextSceneBuildIndex
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3902102777330004777, guid: 3696d16c82ed7df45aeaf1e60024ba3d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
