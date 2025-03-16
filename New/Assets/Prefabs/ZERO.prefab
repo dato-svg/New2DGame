@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7885568560698988087}
   - component: {fileID: 7495855366971207167}
   - component: {fileID: 1844965298438732918}
-  - component: {fileID: 1652409601896838988}
   - component: {fileID: 2527701740581562176}
   - component: {fileID: 4914622872168750821}
   m_Layer: 0
@@ -104,18 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <RotationDuration>k__BackingField: 19.3
---- !u!114 &1652409601896838988
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8791098687718415598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d05896185eec5d440a2b3181d34a68a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _spawner: {fileID: 0}
 --- !u!50 &2527701740581562176
 Rigidbody2D:
   serializedVersion: 5
