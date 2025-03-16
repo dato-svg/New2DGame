@@ -22,7 +22,10 @@ namespace add
             else
             {
                 Destroy(gameObject);
+                return;
             }
+
+            Debug.Log($"[AudioManager] Зарегистрированные звуки: {string.Join(", ", audioClips.Keys)}");
         }
 
    
@@ -42,19 +45,24 @@ namespace add
                 Debug.LogWarning($"[AudioManager] ���� {name} �� ������!");
                 return;
             }
+            if (audioSourcePrefab == null)
+            {
+                Debug.LogError("[AudioManager] audioSourcePrefab не задан!");
+                return;
+            }
 
-            AudioSource source = Instantiate(audioSourcePrefab, transform);
-            source.clip = audioClips[name];
-            source.volume = volume;
-            source.loop = loop;
-            source.Play();
+            GameObject source = Instantiate(audioSourcePrefab).gameObject;
+            source.GetComponent<AudioSource>().clip = audioClips[name];
+            source.GetComponent<AudioSource>().volume = volume;
+            source.GetComponent<AudioSource>().loop = loop;
+            source.GetComponent<AudioSource>().Play();
+            
+            Debug.Log("Play Sound PPPPPPLEAAAASE    : " + name);
+            activeAudioSources.Add(source.GetComponent<AudioSource>());
 
-            activeAudioSources.Add(source);
-
-            if (!loop) Destroy(source.gameObject, source.clip.length);
+            if (!loop) Destroy(source.gameObject, source.GetComponent<AudioSource>().clip.length);
         }
-
-    
+        
         public void StopAllSounds()
         {
             foreach (var source in activeAudioSources)
