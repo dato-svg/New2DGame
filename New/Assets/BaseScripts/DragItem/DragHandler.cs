@@ -7,6 +7,8 @@ namespace BaseScripts.DragItem
     {
         [SerializeField] private Collider2D _collider;
         [SerializeField] private LineRenderer _line;
+        [SerializeField] private AudioSource _grabSound;
+        [SerializeField] private AudioSource _dropSound;
         
         public const float MAX_DISTANCE = 4;
         public const float THROW_INPULSE = 10;
@@ -20,7 +22,16 @@ namespace BaseScripts.DragItem
             if (Input.GetMouseButtonDown(0))
                 TryStartDrag();
 
-            if (Input.GetMouseButton(0) && _currentDraggable != null)
+            if (_currentDraggable as MonoBehaviour == null)
+            {
+                _currentDraggable = null;
+
+                _line.enabled = false;
+
+                return;
+            }
+            
+            if (Input.GetMouseButton(0))
             {
                 _currentDraggable.OnDrag(GetMouseWorldPosition());
                 
@@ -28,7 +39,7 @@ namespace BaseScripts.DragItem
                 _line.SetPosition(1, (_currentDraggable as MonoBehaviour).transform.position);
             }
 
-            if (Input.GetMouseButtonUp(0) && _currentDraggable != null)
+            if (Input.GetMouseButtonUp(0))
                 EndDrag();
 
             CheckBlinking();
@@ -45,6 +56,8 @@ namespace BaseScripts.DragItem
                 
                 _currentDraggable = draggable;
                 _currentDraggable.OnDragStart(this);
+
+                if (_grabSound) _grabSound.Play();
                 
                 Physics2D.IgnoreCollision(_collider, _hit.collider, true);
 
@@ -64,6 +77,8 @@ namespace BaseScripts.DragItem
         {
             if (_currentDraggable == null)
                 return;
+            
+            if (_dropSound) _dropSound.Play();
             
             Physics2D.IgnoreCollision(_collider, (_currentDraggable as MonoBehaviour).GetComponent<Collider2D>(), false);
             
