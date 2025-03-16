@@ -1,5 +1,8 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,13 +11,40 @@ public class Game : MonoBehaviour
     [SerializeField] private ErrorFixer _errorFixer;
     [SerializeField] private int nextSceneBuildIndex;
     [SerializeField] private GameObject OnFinishUI;
-    
-    public static int TargetCountOfFixedErrors { get; set; }
+    [Header("Error Messages")]
+    [SerializeField] private GameObject ErrorMessagePrefab;
+    [SerializeField] private Transform ErrorMessagesContent;
+    [SerializeField] private TextMeshProUGUI ErrorsCountBar;
 
+    public static int TargetCountOfFixedErrors
+    {
+        get
+        {
+            return _targetCount;
+        }
+        set
+        {
+            _targetCount = value;
+            
+            FindAnyObjectByType<Game>().OnCountOfFixedErrorChanged();
+        }
+    }
+
+    private static int _targetCount;
+    
+    private List<GameObject> _errorMessages = new List<GameObject>();
+    
+    
 
     private void Awake()
     {
-        TargetCountOfFixedErrors = 0;
+        _targetCount = 0;
+    }
+
+    [ContextMenu("Create null reference error")]
+    public void TestError()
+    {
+        throw new NullReferenceException();
     }
 
 
@@ -36,6 +66,26 @@ public class Game : MonoBehaviour
 
             StartCoroutine(Finish());
         }
+
+        UpdateErrorsMessages();
+    }
+
+    private void UpdateErrorsMessages()
+    {
+        var targetMessagesCount = Game.TargetCountOfFixedErrors - _errorFixer.CountOfFixedErrors;
+        
+        while (_errorMessages.Count < targetMessagesCount)
+        {
+            _errorMessages.Add( Instantiate(ErrorMessagePrefab, ErrorMessagesContent) );
+        }
+
+        while (_errorMessages.Count > targetMessagesCount)
+        {
+            Destroy(_errorMessages.FirstOrDefault());
+            _errorMessages.RemoveAt(0);
+        }
+        
+        ErrorsCountBar.text = targetMessagesCount.ToString();
     }
 
     private IEnumerator Finish()
