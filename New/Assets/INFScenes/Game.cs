@@ -1,4 +1,5 @@
 using System.Collections;
+using add;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -42,6 +43,7 @@ namespace INFScenes
             yield return new WaitForSecondsRealtime(1f);
 
             OnFinishUI.SetActive(true);
+            AudioManager.Instance.PlaySound(RegisterAllSound.Instance.loadingSoundString,1,false);
 
             yield return new WaitForSecondsRealtime(5f);
         

@@ -32,7 +32,7 @@ namespace add
            }
            
        }
-        
+      
        private void Start()
        {
            AudioManager.Instance.RegisterSound(errorTouchString, errorTouch);
