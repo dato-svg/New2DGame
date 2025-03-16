@@ -1,3 +1,4 @@
+using BaseScripts.Player;
 using BaseScripts.Visitor;
 using DG.Tweening;
 using UnityEngine;
@@ -11,6 +12,9 @@ namespace BaseScripts.Factory.NumberFactory
         
         [SerializeField] private NumberSpawner _spawner;
         
+        [SerializeField,Range(2,4)] private float mixScale = 3;
+        [SerializeField,Range(2,4)] private float maxScale = 6;
+        
         private float _rotationDirection; 
         private Rigidbody2D _rigidbody;
 
@@ -18,6 +22,12 @@ namespace BaseScripts.Factory.NumberFactory
         {
             _rigidbody = GetComponent<Rigidbody2D>();
             _rotationDirection = -1;
+        }
+
+        private void Start()
+        {
+            var scale = Random.Range(mixScale, maxScale);
+            transform.localScale = new Vector3(scale, scale, scale);
         }
 
         public void Initialize(NumberSpawner spawner)
@@ -48,8 +58,12 @@ namespace BaseScripts.Factory.NumberFactory
         
         private void OnCollisionEnter2D(Collision2D other)
         {
-            if (other.collider.CompareTag("Player")) // TODO -- CHANGE TAG
+            if (other.collider.TryGetComponent(out PlayerColorChanged playerColorChanged)) // TODO -- CHANGE TAG
+            {
                 _spawner.TouchPlayerNumber(this);
+                playerColorChanged.StartCoroutiner();
+               
+            }
             
             else if (other.collider.CompareTag("Floor")) // TODO --CHANGE THIS SHIT TOО
             {
