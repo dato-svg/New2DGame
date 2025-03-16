@@ -449,7 +449,7 @@ MonoBehaviour:
   jumpSoundString: jumpSound
   walkSound: {fileID: 8300000, guid: e7263dd47c0a1e946980df72d4eceb47, type: 3}
   walkSoundString: walkSound
-  loadingSound: {fileID: 0}
+  loadingSound: {fileID: 8300000, guid: fd36ba801c0843c4d8e6d02b24821165, type: 3}
   loadingSoundString: loadingSound
 --- !u!1 &7587660210806707708
 GameObject:
