@@ -6,26 +6,33 @@ namespace BaseScripts.BugSystem
     [RequireComponent(typeof(Rigidbody2D))]
     public class BlinkingObject : MonoBehaviour, IBlinkable
     {
-        [field:SerializeField] public bool Blinking { get; private set; }
-        
-        [SerializeField] private float activeTime = 2f; 
+        [field: SerializeField] public bool Blinking { get; private set; }
+        [field: SerializeField] public bool BlinkWait { get; private set; }
+
+        [SerializeField] private float activeTime = 2f;
         [SerializeField] private float blinkInterval = 0.2f;
-        [SerializeField] private int blinkCount = 5;
+        [SerializeField] private int blinkCount = 10;
         
-        [SerializeField] private BodyChanger _bodyChanger;
         private Collider2D _collider2D;
         private SpriteRenderer _spriteRenderer;
         private Rigidbody2D _rigidbody2D;
-        
+
         private Coroutine _blinkCoroutine;
 
         private void Awake()
         {
-            _bodyChanger = GetComponentInParent<BodyChanger>();
             _collider2D = GetComponent<Collider2D>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _rigidbody2D = GetComponent<Rigidbody2D>();
         }
+
+        private void OnEnable()
+        {
+            blinkCount = 10;
+            Blinking = true;
+            BlinkWait = true;
+        }
+
         private void Start()
         {
             Activate();
@@ -35,11 +42,10 @@ namespace BaseScripts.BugSystem
         public void Activate()
         {
             blinkCount = 10;
-            
             Deactivate();
             _blinkCoroutine = StartCoroutine(Blink());
         }
-        
+
         private IEnumerator Blink()
         {
             while (blinkCount > 0)
@@ -50,14 +56,14 @@ namespace BaseScripts.BugSystem
                 ActiveEnableObject(true);
                 blinkCount--;
                 Blinking = true;
+                BlinkWait = true;
             }
-            
+
             Debug.Log("blinking");
-            _bodyChanger.ActiveRandomObject();
             ActiveEnableObject(true);
             Blinking = false;
             yield return new WaitForSeconds(activeTime);
-            Activate();
+            BlinkWait = false;
         }
 
 
@@ -66,8 +72,9 @@ namespace BaseScripts.BugSystem
         {
             if (_blinkCoroutine == null)
                 return;
-            
+
             StopCoroutine(_blinkCoroutine);
+            _blinkCoroutine = null;
         }
 
         private void ActiveEnableObject(bool active)
