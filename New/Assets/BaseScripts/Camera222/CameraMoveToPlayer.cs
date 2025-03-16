@@ -1,4 +1,5 @@
 using System.Collections;
+using BaseScripts.SceneGod;
 using UnityEngine;
 
 namespace BaseScripts.Camera222
@@ -9,6 +10,7 @@ namespace BaseScripts.Camera222
         [SerializeField] private Animator animator;
         
         [SerializeField] private AudioSource source;
+        [SerializeField] private GameStarter  gameStarter;
 
         private bool _isMoving;
         private void Awake()
@@ -29,6 +31,7 @@ namespace BaseScripts.Camera222
                 {
                     animator.SetTrigger(Move);
                     _isMoving = true;
+                    gameStarter.CanChangeScene = true;
                 }
                   
             }
