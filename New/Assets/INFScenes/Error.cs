@@ -1,6 +1,5 @@
 using System;
 using BaseScripts.BugSystem;
-using INFScenes;
 using UnityEngine;
 
 public class Error : MonoBehaviour
