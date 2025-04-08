@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      JetBrains_Rider_Icon.svg-removebg-preview_0: -2882390228977212343
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
